@@ -1,0 +1,22 @@
+SpringBatch常见问题总结：
+1.batch必须配置数据库(或内置数据库，类似H2)，因为batch操作
+的是job，job需要在数据库存内容。如果不使用默认的内存数据库，要注掉依赖
+
+2.batch生成的关键表的作用？
+batch_job_instance：job实例，有job名等。每个相同Job实例只会存一份。
+batch_job_execution：job执行情况等。
+batch_step_execution：step执行情况等。
+batch_job_execution_params：Job参数。
+batch_job_execution_context：job上下文，可以存放job共享数据。
+batch_step_execution_context：Step上下文，可以存放Step共享数据。
+
+
+
+3.batch中一些对象的关系？
+JobLauncher启动Job，
+Job中有一到多个Step，
+Step有两种实现方式：
+    chunk：一个Step有ItemReader、Processor、Writer三部分。
+    tasklet
+
+4.注意用@Bean注解的方法，方法名就是被注入bean的名
