@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/basic-spring/basic-spring.iml" filepath="$PROJECT_DIR$/basic-spring/basic-spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-boot/spring-batch/spring-batch.iml" filepath="$PROJECT_DIR$/spring-boot/spring-batch/spring-batch.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-boot/spring-boot.iml" filepath="$PROJECT_DIR$/spring-boot/spring-boot.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-cloud/spring-cloud.iml" filepath="$PROJECT_DIR$/spring-cloud/spring-cloud.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-knowledge.iml" filepath="$PROJECT_DIR$/spring-knowledge.iml" />
