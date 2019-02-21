@@ -27,8 +27,10 @@ public class JobLanucherController {
                 .toJobParameters();
 
         //启动任务，并把参数传给任务
-        jobLauncher.run(jobLanucherDemoJob, jobParameters);
-
-        return null;
+        JobExecution jobExecution = jobLauncher.run(jobLanucherDemoJob, jobParameters);
+        if ("COMPLETED".equals(jobExecution.getExitStatus().getExitCode()))
+            return "执行成功";
+        else
+            return "执行失败";
     }
 }
