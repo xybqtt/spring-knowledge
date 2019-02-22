@@ -1,0 +1,62 @@
+1.windows下安装Erlang？
+http://www.erlang.org/download/otp_win64_17.3.exe
+安装好了，配置环境变量
+cmd窗口：erl -version
+
+2.RabbitMQ下载地址?
+http://www.rabbitmq.com/download.html
+配置环境变量
+cmd窗口：rabbitmq-service
+
+配置RabbitMQ的两种方式：
+    一：进入安装目录/sbin，打开cmd窗口，输入rabbitmq-plugins enable rabbitmq_management(启用管理插件)
+        就可以在cmd窗口(以管理员身份运行)中运行：net stop RabbitMQ、net start RabbitMQ来关闭，启动mq
+        在浏览器查看：http://127.0.0.1:15672/
+        默认账密：guest/guest。登陆成功即安装成功。
+
+3.创建用户及相关配置
+http://127.0.0.1:15672/
+登陆 >>  admin >> add a user >> 填写信息。
+    超级管理员(administrator)：可登陆管理控制台，可查看所有的信息，并且可以对用户，策略(policy)进行操作。
+    监控者(monitoring)：可登陆管理控制台，同时可以查看rabbitmq节点的相关信息(进程数，内存使用情况，磁盘使用情况等)
+    策略制定者(policymaker)：可登陆管理控制台, 同时可以对policy进行管理。但无法查看节点的相关信息(上图红框标识的部分)。
+    普通管理者(management)：仅可登陆管理控制台，无法看到节点信息，也无法对策略进行管理。
+    其他：无法登陆管理控制台，通常就是普通的生产者和消费者。
+
+添加virtual host?
+右侧virtual host >> add a new virtual host >> 输入名字 >> 添加
+virtual host只是起到一个命名空间的作用，所以可以多个user共同使用一个virtual host，vritual_host = '/'，这个是系统默认的，
+就是说当我们创建一个到rabbitmq的connection时候，它的命名空间是'/'，需要注意的是不同的命名空间之间的资源是不能访问的，
+比如 exchang,queue ,bingding等
+
+点击刚才生成的用户信息 >> permissions >> virtual host >> 选取刚才的名字 >> set permission。
+点击admin则，可以看到users下面的生成的用户can access virtual hosts有刚才的用户名
+
+4.简单信息介绍
+ports and contexts
+
+listening ports
+portocol    bound to    port
+amqp        0.0.0.0     5672(AMQP协议端口)
+amqp        ::          5672
+clustering  ::          25672(集群端口)
+
+web contexts
+context                 bound to    port                ssl     path
+rabbitMQ management     0.0.0.0     15672(管理工具端口)  ⚪       /
+
+5.五种队列
+    P：消息生产者。 C：消息消费者。
+    a.简单队列：simple-queue
+        P → [][][][][][] → C
+    b.work模式：1个生产者，多个消费者，一个消息只能被一个消费者获取。
+                          ⬆→ C1
+        P → [][][][][][][]
+                          ⬇→ C2
+        消费者1和消费者2获取到的消息内容是不同的，同一个消息只能被一个消费者获取。
+        消费者1和消费者2获取到的消息的数量是相同的，一个是消费奇数号消息，一个是偶数。
+        RabbitMQ 默认将消息顺序发送给下一个消费者，这样，每个消费者会得到相同数量的
+        消息。即轮询（round-robin）分发消息。
+
+
+
