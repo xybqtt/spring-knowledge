@@ -2,7 +2,7 @@ package simpleQueue;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import utils.ConnectionUtil;
+import aUtils.ConnectionUtil;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -27,9 +27,11 @@ public class SimpleProducer {
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 
         // 4.消息内容
-        String message = "Hello World!";
-        channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
-        System.out.println("[x] Sent '" + message + "'");
+        for(int i = 0; i< 100; i++){
+            String message = "Hello World " + i;
+            channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+            System.out.println("[x] Sent '" + message + "'");
+        }
 
         // 5.关闭通道和连接
         channel.close();

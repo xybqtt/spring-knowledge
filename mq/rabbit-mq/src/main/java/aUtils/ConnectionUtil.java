@@ -1,4 +1,4 @@
-package utils;
+package aUtils;
 
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
