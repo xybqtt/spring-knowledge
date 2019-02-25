@@ -2,7 +2,7 @@ package workModel;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import utils.ConnectionUtil;
+import aUtils.ConnectionUtil;
 
 /**
  * 〈一句话功能简述〉<br> 
