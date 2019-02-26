@@ -13,6 +13,11 @@ import com.rabbitmq.client.ConnectionFactory;
  */
 public class ConnectionUtil {
 
+    /**
+     * 获取mq连接
+     * @return
+     * @throws Exception
+     */
     public static Connection getConnection() throws Exception {
         // 1.定义连接工厂
         ConnectionFactory connectionFactory = new ConnectionFactory();
@@ -24,7 +29,7 @@ public class ConnectionUtil {
         connectionFactory.setPort(5672);
 
         // 4.设置账户信息：用户名、密码、vhost
-        connectionFactory.setVirtualHost("xybHost");
+        connectionFactory.setVirtualHost("/xybhost");
         connectionFactory.setUsername("xyb");
         connectionFactory.setPassword("xyb");
 

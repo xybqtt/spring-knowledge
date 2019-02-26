@@ -1,4 +1,4 @@
-package workModel.ableBusyModel;
+package work.ableBusyModel;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -13,7 +13,7 @@ import aUtils.ConnectionUtil;
  * @create 2019/2/22
  * @since 1.0.0
  */
-public class ABConsumer1 {
+public class ABConsumer2 {
 
     private static final String QUEUE_NAME = "test_queue_work";
 
@@ -40,9 +40,9 @@ public class ABConsumer1 {
         while (true) {
             QueueingConsumer.Delivery delivery = queueingConsumer.nextDelivery();
             String message = new String(delivery.getBody());
-            System.out.println(" [y] Received1 '" + message + "'");
+            System.out.println(" [y] Received2 '" + message + "'");
             // 休眠
-            Thread.sleep(10);
+            Thread.sleep(1000);
             // 返回确认状态，注释掉表示使用自动确认模式
             channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
         }
