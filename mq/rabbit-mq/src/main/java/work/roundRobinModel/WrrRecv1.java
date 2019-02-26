@@ -13,7 +13,7 @@ import java.io.IOException;
  * @create 2019/2/22
  * @since 1.0.0
  */
-public class WRecv1 {
+public class WrrRecv1 {
 
     private static final String QUEUE_NAME = "test_work_queue";
 

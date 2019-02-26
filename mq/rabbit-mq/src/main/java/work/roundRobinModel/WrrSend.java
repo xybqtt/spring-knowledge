@@ -1,8 +1,8 @@
-package work;
+package work.roundRobinModel;
 
+import aUtils.ConnectionUtil;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import aUtils.ConnectionUtil;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -12,9 +12,9 @@ import aUtils.ConnectionUtil;
  * @create 2019/2/22
  * @since 1.0.0
  */
-public class WorkProducer {
+public class WrrSend {
 
-    private final static String QUEUE_NAME = "test_queue_work";
+    private final static String QUEUE_NAME = "test_work_queue";
 
     public static void main(String[] args) throws Exception {
         // 1.获取到连接
@@ -28,11 +28,11 @@ public class WorkProducer {
 
 
         // 4.消息内容
-        for(int i = 0; i< 100; i++){
-            String message = "Hello World " + i;
+        for(int i = 0; i< 50; i++){
+            String message = "hello " + i;
             channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
-            System.out.println("[x] Sent '" + message + "'");
-            Thread.sleep(i * 10);
+            System.out.println("wrr send '" + message + "'");
+            Thread.sleep(i * 20);
         }
 
 

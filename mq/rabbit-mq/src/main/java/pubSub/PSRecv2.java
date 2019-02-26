@@ -1,21 +1,15 @@
-package work.roundRobinModel;
+package pubSub;
 
 import aUtils.ConnectionUtil;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
 
-/**
- * 〈一句话功能简述〉<br>
- * 〈work模式下的轮询消费者〉
- *
- * @author XYB
- * @create 2019/2/22
- * @since 1.0.0
- */
-public class WRecv2 {
+public class PSRecv2 {
 
-    private static final String QUEUE_NAME = "test_work_queue";
+    private static final String QUEUE_NAME = "test_queue_fanout_sms";
+
+    private static final String EXCHANGE_NAME = "test_exchange_fanout";
 
     public static void main(String[] args) throws Exception {
         // 1.获取连接
@@ -26,6 +20,9 @@ public class WRecv2 {
 
         // 3.声明队列
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+
+        // 4.绑定队列至交换机
+        channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, "");
 
         // 4.同一时刻服务器只会发一条消息给消费者
 //        channel.basicQos(1);
@@ -57,20 +54,3 @@ public class WRecv2 {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
