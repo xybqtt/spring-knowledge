@@ -11,8 +11,13 @@
     </parent>
 
     <groupId>com.xyb</groupId>
-    <artifactId>kafka</artifactId>
+    <artifactId>spring-active-mq</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+    </properties>
     
 </project>

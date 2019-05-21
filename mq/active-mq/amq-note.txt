@@ -1,0 +1,6 @@
+1、kafka性能最高，数据安全性低。rabbitmq性能居中(比amq快20倍)，数据安全性高。
+activemq：性能低，安全，但是适用场景多。
+2、下载解压amq后，文件夹目录：
+    bin：根据32、64位，运行不同activemq.ba;
+    conf：配置文件夹，主要是activemq.yml、users.properties(以k=v存储账密)；
+    data：存储数据的地方。

@@ -1,0 +1,19 @@
+1、java消息服务(JMS)定义了java中访问消息中间件的接口，但并未给出实现，
+实现了jms接口的消息中间件称为jms provider。已知的包括activemq、
+rocketmq、rabbitmq、kafka等。
+2、相关术语：
+    provider(message provider)：生产者；
+    consumer(message consumer)：消费者；
+    PTP：point to point，点对点消息模型；
+    pub/sub：publish/subscribe，发布/订阅消息模型；
+    queue：队列目标；
+    topic：主题目标；
+    ConnectionFactory：连接工厂，jms用它创建连接；
+    Destination：消息的目的地；
+    Session：会话，一个发送或者接收消息的线程。
+3、jms定义了5中数据类型：
+    StreamMessage：java原始值数据流；
+    MapMessage：一套k-v对；
+    TextMessage：一个字符串对象；
+    ObjectMessage：一个序列化的java对象；
+    BytesMessage：一个未解释字节的数据流。
