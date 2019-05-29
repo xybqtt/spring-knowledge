@@ -18,7 +18,7 @@
     <modules>
         <module>spring-active-mq</module>
         <module>spring-kafka</module>
-        <module>spring-rabbit-mq</module>
+        <module>rabbit-mq</module>
         <module>active-mq</module>
         <module>jms</module>
     </modules>
