@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util-4.0.xsd"
+       >
+
+    <!-- 配置bean: 构造器注入
+        class：通过反射获取对象，所以必须有默认无参构造器
+        id：唯一标志，容器可通过id获取对象。
+        对于基本类型、包装类、String，spring可以用字面量来表示，比如18，如果赋值给double，则自动变为18.0d，<![CDATE[]]用来包裹非法的字符。比如<
+    -->
+    <bean id="user0" class="com.xyb.beans1.User">
+        <!-- 使用构造方法注入
+            value：参数值。 index：第几个参数，从0开始。 name：参数名。 type：参数类型。 ref：引用。
+            不需要全写，只要能确定调用哪个构造方法就行
+         -->
+        <constructor-arg value="xyb" index="0" name="userName" type="java.lang.String"/>
+        <constructor-arg name="car1" ref="car"/>
+
+        <!-- 赋值null值的专有标记 -->
+        <!--<constructor-arg name="car1"><null/></constructor-arg>-->
+
+        <!-- 也可如此表示 -->
+        <!--<constructor-arg name="userName">
+            <value>xyb</value>
+        </constructor-arg>
+        <constructor-arg name="car1">
+            <ref bean="car"/>
+        </constructor-arg>-->
+
+    </bean>
+
+    <!-- set注入bean -->
+    <bean id="user1" class="com.xyb.beans1.User">
+        <property name="age" value="24"/>
+        <property name="car2" ref="car"/>
+        <!-- 也可如此表示 -->
+        <!--<property name="age">
+            <value>24</value>
+        </property>
+        <property name="car2">
+            <ref bean="car"/>
+        </property>-->
+    </bean>
+
+    <!-- 内部类注入：即不在专门生成bean，直接在内部写入 -->
+    <bean id="user2" class="com.xyb.beans1.User">
+        <constructor-arg name="car1">
+            <bean class="com.xyb.beans1.Car">
+                <constructor-arg name="price" value="20000"/>
+            </bean>
+        </constructor-arg>
+        <property name="car2">
+            <bean class="com.xyb.beans1.Car">
+                <constructor-arg name="price" value="20001"/>
+            </bean>
+        </property>
+    </bean>
+
+
+
+    <!-- p命名空间的使用：(xmlns:p="http://www.springframework.org/schema/p")，autowire：byName、byType、construct不常用 -->
+    <bean id="user5" class="com.xyb.beans1.User" p:userName="xyb" p:car1-ref="car" p:list-ref="list2" autowire="byName"/>
+
+
+
+
+    <!-- 级联属性的注入，即给属性的属性赋值 -->
+    <bean id="user3" class="com.xyb.beans1.User">
+        <constructor-arg name="car1" ref="car"/>
+        <property name="car1.price" value="10001"/>
+    </bean>
+
+    <!-- 注入list和map -->
+    <bean id="user4" class="com.xyb.beans1.User">
+        <constructor-arg name="list">
+            <list>
+                <value>5</value>
+                <ref bean="car"/>
+            </list>
+        </constructor-arg>
+        <constructor-arg name="map">
+            <map>
+                <entry key="5" value="6"/>
+                <entry key="7" value-ref="car"/>
+            </map>
+        </constructor-arg>
+        <constructor-arg name="set">
+            <set>
+                <value>1</value>
+                <ref bean="car"/>
+            </set>
+        </constructor-arg>
+        <constructor-arg name="properties">
+            <props>
+                <prop key="1">2</prop>
+                <prop key="5">8</prop>
+            </props>
+        </constructor-arg>
+
+        <!-- 属性注入一样 -->
+        <property name="list">
+            <list>
+                <value>6</value>
+                <ref bean="car"/>
+            </list>
+        </property>
+    </bean>
+    <!-- 旧版：配置独立的list、map、set、properties -->
+    <bean id="list1" class="org.springframework.beans.factory.config.ListFactoryBean">
+        <property name="sourceList">
+            <list>
+                <value>1</value>
+                <value>2</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="map1" class="org.springframework.beans.factory.config.MapFactoryBean">
+        <property name="sourceMap">
+            <map>
+                <entry key="1" value="2"/>
+                <entry key="3" value="4"/>
+            </map>
+        </property>
+    </bean>
+    <bean id="set1" class="org.springframework.beans.factory.config.SetFactoryBean">
+        <property name="sourceSet">
+            <set>
+                <value>1</value>
+                <value>2</value>
+            </set>
+        </property>
+    </bean>
+    <bean id="prop1" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+                <prop key="1">2</prop>
+                <prop key="3">4</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 新版配置独立的list、map、set、properties -->
+    <util:list id="list2" list-class="java.util.ArrayList">
+        <value>3</value>
+        <value>4</value>
+    </util:list>
+    <util:map id="map2" map-class="java.util.HashMap">
+        <entry key="1" value="2"/>
+        <entry key="3" value="4"/>
+    </util:map>
+    <util:set id="set2" set-class="java.util.HashSet">
+        <value>1</value>
+        <value>2</value>
+    </util:set>
+    <util:properties id="prop2">
+        <prop key="1">2</prop>
+        <prop key="3">4</prop>
+    </util:properties>
+
+
+    <bean id="car" class="com.xyb.beans1.Car">
+        <constructor-arg name="price" value="10000"/>
+    </bean>
+
+
+</beans>
