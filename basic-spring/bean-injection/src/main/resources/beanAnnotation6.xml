@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util-4.0.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!-- 指定ioc容器要扫描的包，多个包用逗号隔开
+            base-package：要扫描的包。
+            resource-pattern：在base-package的基础上只扫描匹配的这些包和类。
+            use-default-filters：使用默认过滤器，默认为true，即扫描@Service、@Component、@Repository、@Controller。使用过滤器时设置为false。
+            -->
+    <!--resource-pattern="excluPack/*.class"-->
+    <context:component-scan base-package="com.xyb.beanAnnotation6" use-default-filters="true">
+
+        <!-- 不扫描基本包下的匹配的组件。相当于黑名单
+            type：匹配模式。
+                -annotation：注解匹配。
+                -assignable：接口匹配，此接口的所有实现类都不扫描。
+            expression：注解全限定名或接口全限定名。
+            -->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+        <context:exclude-filter type="assignable" expression="com.xyb.beanAnnotation6.excludePack.ExcludeInterface"/>
+
+
+        <!-- 只扫描以下文件：用法同exclude。相当于白名单-->
+        <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>-->
+    </context:component-scan>
+
+
+</beans>

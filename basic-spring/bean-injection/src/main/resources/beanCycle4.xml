@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util-4.0.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+    <!--
+        ioc容器对bean的生命周期的管理过程：
+        1、通过构造器或工厂方法创建bean实例；
+        2、为bean的属性设置值和对其它bean的引用；
+        3、调用postProcessBeforeInitialization方法；
+        4、调用bean的初始化方法；<bean id="xxx" class="xxx" init-method="">
+        5、调用postProcessAfterInitialization方法；
+        6、bean的使用；
+        7、当容器关闭时，调用bean的销毁方法。<bean id="xxx" class="xxx" destroy-method=""> -->
+    <bean id="car" class="com.xyb.beanCycle4.Car" init-method="initMethod" destroy-method="destoryMethod">
+        <property name="price" value="50000"/>
+        <property name="maxSpeed" value="300"/>
+    </bean>
+
+    <!-- bean后处理器的配置，具体查看类 -->
+    <bean class="com.xyb.beanCycle4.MyBeanPostProcessor"/>
+
+</beans>

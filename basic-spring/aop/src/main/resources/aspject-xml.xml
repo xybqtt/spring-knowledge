@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util-4.0.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="calc" class="com.xyb.aspject.CalcImpl"/>
+
+    <!-- 配置切面的bean -->
+    <bean id="loggingAspjectXml" class="com.xyb.aspject.cutFaceXml.LoggingAspectXml"/>
+
+    <!-- 配置AOP -->
+    <aop:config>
+        <!-- 配置切点表达式 -->
+        <aop:pointcut id="pointCut" expression="execution(public int com.xyb.aspject.Calc.sub(int, int))"/>
+        <!-- 配置切面及通知，多个切面，则写多个aop:aspect节点 -->
+        <aop:aspect ref="loggingAspjectXml" order="2">
+            <aop:before method="beforeMethod" pointcut-ref="pointCut"/>
+            <aop:after method="afterMethod" pointcut-ref="pointCut"/>
+            <aop:after-throwing method="afterThrowing" pointcut-ref="pointCut" throwing="e"/>
+            <aop:after-returning method="afterReturning" pointcut-ref="pointCut" returning="result"/>
+            <aop:around method="around" pointcut-ref="pointCut"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

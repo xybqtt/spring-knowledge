@@ -1,0 +1,22 @@
+1、spring官网：http://spring.io/
+2、spring提供了2种IOC容器实现：
+    2.1、BeanFactory：ioc容器的基本实现，是面向spring的。里面有多种加载bean的方式。
+    2.2、ApplicationContext：是BeanFactory的子接口，是面向开发者。初始化上下文时，初始化所有单例bean。
+        2.2.1、ConfigurableApplicationContext是2.2的子接口，增加了refresh()、close()方法，使
+            ApplicationContext具有启动、刷新、关闭上下文的能力。
+            2.2.1、ClassPathXmlApplicationContext：从类路径下加载配置文件
+            2.2.2、FileSystemXmlApplicationContext：从文件系统加载配置文件。
+3、bean标签的parent、abstract、depends-on属性。
+4、bean生命周期管理和bean后处理器。
+5、静态工厂、实例工厂、FactoryBean三种方式创建bean。
+6、(<context:component-scan>标签)在classpath中扫描组件：spring能够从classpath下自动扫描、侦测和实例化具有特定注解的组件。
+    特定组件包括：
+    --@Component：基本注解，标识了一个受spring管理的组件
+    --@Respository：标识持久层组件
+    --@Service：标识业务层组件
+    --@Controller：标识表现层组件
+
+    对于扫描到的组件，spring的默认命名规则是：使用非限定类名，首字母小写，也可通过在注解中使用value属性标识组件的名称。
+
+    @Autowired注解查看com.xyb.beanAnnotation6.annotationTest.MyController。
+7、泛型注解。
