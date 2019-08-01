@@ -7,6 +7,7 @@
     <modules>
         <module>bean-injection</module>
         <module>aop</module>
+        <module>dubbo</module>
     </modules>
 
     <parent>

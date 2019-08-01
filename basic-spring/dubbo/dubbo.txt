@@ -1,0 +1,8 @@
+一、dubbo远程调用过程
+    1、发布：启动provider，并将ip:port发送到注册中心zk上。
+    2、订阅：consumer订阅某个provider的服务。
+    3、推送：zk将consumer订阅的provider地址发送到consumer上。
+    4、调用：consumer根据ip:port调用provider。
+    5、监听器：监听consumer和provider是否正常运行。
+二、准备
+    1、启动zk
