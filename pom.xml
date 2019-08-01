@@ -18,6 +18,7 @@
         <module>basic-spring</module>
         <module>spring-boot</module>
         <module>mq</module>
+        <module>dubbo</module>
     </modules>
 
     <build>
